@@ -33,7 +33,7 @@
     "bootstrap": "bash scripts/bootstrap-service.sh"
   },
   "dependencies": {
-    "@asteasolutions/zod-to-openapi": "^7.3.4",
+    "@asteasolutions/zod-to-openapi": "^8.4.1",
     "compression": "^1.8.1",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
