@@ -73,6 +73,23 @@ This runs lint, typecheck, tests, and build.
 
 `vercel.json` already rewrites `/api/*` to `api/index.ts`.
 
+## Automated dependency and security updates
+
+This template includes:
+
+- `.github/dependabot.yml` for weekly npm and GitHub Actions updates.
+- `.github/workflows/dependabot-auto-merge.yml` to auto-merge safe Dependabot PRs (patch/minor + PRs labeled `security`) after required checks pass.
+
+One-time GitHub settings to enable:
+
+1. **Settings -> Security -> Code security and analysis**
+   - Enable **Dependabot alerts**
+   - Enable **Dependabot security updates**
+2. **Settings -> General -> Pull Requests**
+   - Enable **Allow auto-merge**
+3. **Branch protection (recommended on `main`)**
+   - Require status checks before merge (`CI / verify`)
+
 ## Google + AEO/GEO checklist
 
 1. Set `SITE_URL` to your production canonical domain in Vercel env vars.
