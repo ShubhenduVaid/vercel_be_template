@@ -1,0 +1,8 @@
+process.env.APP_ENV = "local";
+process.env.LOG_LEVEL = "silent";
+process.env.DOCS_ENABLED = "true";
+process.env.RATE_LIMIT_ENABLED = "false";
+process.env.AUTH_ENABLED = "false";
+process.env.READINESS_FAIL = "false";
+process.env.SERVICE_NAME = "vercel-be-template-test";
+process.env.SERVICE_VERSION = "0.1.0-test";
