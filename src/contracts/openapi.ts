@@ -142,6 +142,81 @@ export const createOpenApiDocument = (config: AppConfig): OpenApiDocument => {
     },
   });
 
+  registry.registerPath({
+    method: "get",
+    path: "/robots.txt",
+    tags: ["Discovery"],
+    summary: "Robots directives for crawlers",
+    responses: {
+      200: {
+        description: "robots.txt directives",
+        content: {
+          "text/plain": {
+            schema: z.string(),
+          },
+        },
+      },
+      500: {
+        description: "Internal error",
+        content: {
+          "application/json": {
+            schema: ErrorResponseSchema,
+          },
+        },
+      },
+    },
+  });
+
+  registry.registerPath({
+    method: "get",
+    path: "/sitemap.xml",
+    tags: ["Discovery"],
+    summary: "Sitemap for search engine discovery",
+    responses: {
+      200: {
+        description: "XML sitemap",
+        content: {
+          "application/xml": {
+            schema: z.string(),
+          },
+        },
+      },
+      500: {
+        description: "Internal error",
+        content: {
+          "application/json": {
+            schema: ErrorResponseSchema,
+          },
+        },
+      },
+    },
+  });
+
+  registry.registerPath({
+    method: "get",
+    path: "/llms.txt",
+    tags: ["Discovery"],
+    summary: "LLM-oriented project summary and canonical links",
+    responses: {
+      200: {
+        description: "LLM discovery document",
+        content: {
+          "text/plain": {
+            schema: z.string(),
+          },
+        },
+      },
+      500: {
+        description: "Internal error",
+        content: {
+          "application/json": {
+            schema: ErrorResponseSchema,
+          },
+        },
+      },
+    },
+  });
+
   const generator = new OpenApiGeneratorV3(registry.definitions);
 
   return generator.generateDocument({
@@ -160,6 +235,10 @@ export const createOpenApiDocument = (config: AppConfig): OpenApiDocument => {
       {
         name: "Documentation",
         description: "API contract and interactive documentation endpoints",
+      },
+      {
+        name: "Discovery",
+        description: "Search and AI crawler discovery endpoints",
       },
     ],
   });

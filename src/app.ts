@@ -13,6 +13,7 @@ import { notFoundMiddleware } from "./middleware/not-found";
 import { requestIdMiddleware } from "./middleware/request-id";
 import { createAuthContextMiddleware } from "./modules/auth/middleware";
 import type { AuthStrategy } from "./modules/auth/types";
+import { createDiscoveryRouter } from "./modules/discovery/routes";
 import { createDocsRouter } from "./modules/docs/routes";
 import { createRateLimitMiddleware } from "./modules/rate-limit/middleware";
 import { createNoopRateLimitStore } from "./modules/rate-limit/noop-store";
@@ -96,6 +97,7 @@ export const createApp = (options: CreateAppOptions = {}): Application => {
     }),
   );
 
+  app.use(createDiscoveryRouter(config));
   app.use("/api/v1", v1Router);
 
   app.get("/", (req, res) => {
@@ -105,6 +107,11 @@ export const createApp = (options: CreateAppOptions = {}): Application => {
         status: "ok",
         docs: "/api/v1/docs",
         openapi: "/api/v1/openapi.json",
+        discovery: {
+          robots: "/robots.txt",
+          sitemap: "/sitemap.xml",
+          llms: "/llms.txt",
+        },
       },
       requestId: req.requestId,
     });

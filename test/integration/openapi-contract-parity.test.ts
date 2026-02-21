@@ -68,6 +68,9 @@ describe("openapi contract parity", () => {
       "/api/v1/meta",
       "/api/v1/openapi.json",
       "/api/v1/docs",
+      "/robots.txt",
+      "/sitemap.xml",
+      "/llms.txt",
     ];
 
     expectedGetPaths.forEach((path) => {
@@ -88,6 +91,9 @@ describe("openapi contract parity", () => {
       "/api/v1/meta": [200, 500],
       "/api/v1/openapi.json": [200, 500],
       "/api/v1/docs": [301, 500],
+      "/robots.txt": [200, 500],
+      "/sitemap.xml": [200, 500],
+      "/llms.txt": [200, 500],
     };
 
     Object.entries(expectedDocumentedStatuses).forEach(([path, statuses]) => {
@@ -101,6 +107,9 @@ describe("openapi contract parity", () => {
       { app: readyApp, path: "/api/v1/meta", expectedStatus: 200 },
       { app: readyApp, path: "/api/v1/openapi.json", expectedStatus: 200 },
       { app: readyApp, path: "/api/v1/docs", expectedStatus: 301 },
+      { app: readyApp, path: "/robots.txt", expectedStatus: 200 },
+      { app: readyApp, path: "/sitemap.xml", expectedStatus: 200 },
+      { app: readyApp, path: "/llms.txt", expectedStatus: 200 },
     ];
 
     for (const check of runtimeChecks) {

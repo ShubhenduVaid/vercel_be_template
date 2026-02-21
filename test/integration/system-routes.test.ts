@@ -17,6 +17,11 @@ const RootResponseSchema = z.object({
     status: z.literal("ok"),
     docs: z.literal("/api/v1/docs"),
     openapi: z.literal("/api/v1/openapi.json"),
+    discovery: z.object({
+      robots: z.literal("/robots.txt"),
+      sitemap: z.literal("/sitemap.xml"),
+      llms: z.literal("/llms.txt"),
+    }),
   }),
   requestId: z.string().min(1),
 });
@@ -33,6 +38,7 @@ describe("system routes", () => {
     expect(body.data.status).toBe("ok");
     expect(body.data.docs).toBe("/api/v1/docs");
     expect(body.data.openapi).toBe("/api/v1/openapi.json");
+    expect(body.data.discovery.sitemap).toBe("/sitemap.xml");
   });
 
   it("returns health response envelope", async () => {

@@ -1,4 +1,5 @@
 process.env.APP_ENV = "local";
+process.env.SITE_URL = "http://localhost:3001";
 process.env.LOG_LEVEL = "silent";
 process.env.DOCS_ENABLED = "true";
 process.env.RATE_LIMIT_ENABLED = "false";

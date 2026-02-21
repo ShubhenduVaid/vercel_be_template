@@ -42,6 +42,8 @@ What this updates automatically:
 cp .env.local.example .env.local
 ```
 
+Set `SITE_URL` to your canonical API domain before deploying (example: `https://api.yourdomain.com`).
+
 ### 5. Run locally
 
 ```bash
@@ -70,6 +72,14 @@ This runs lint, typecheck, tests, and build.
 4. Deploy.
 
 `vercel.json` already rewrites `/api/*` to `api/index.ts`.
+
+## Google + AEO/GEO checklist
+
+1. Set `SITE_URL` to your production canonical domain in Vercel env vars.
+2. Keep crawler endpoints enabled: `GET /robots.txt`, `GET /sitemap.xml`, `GET /llms.txt`.
+3. Submit `${SITE_URL}/sitemap.xml` in Google Search Console.
+4. Add clear repo description and topics on GitHub (these influence search and AI retrieval quality).
+5. Keep `README.md`, `/api/v1/docs`, and `/api/v1/openapi.json` aligned with actual behavior.
 
 ## What you get
 
@@ -122,6 +132,7 @@ Important vars:
 
 - `APP_ENV` (`local|preview|production`)
 - `PORT`
+- `SITE_URL` (canonical public base URL, no path)
 - `LOG_LEVEL`
 - `CORS_ORIGINS` (comma-separated)
 - `DOCS_ENABLED`
@@ -147,6 +158,9 @@ For production services, pass concrete implementations into `createApp({ authStr
 ## Public endpoints
 
 - `GET /`
+- `GET /robots.txt`
+- `GET /sitemap.xml`
+- `GET /llms.txt`
 - `GET /api/v1/health`
 - `GET /api/v1/ready`
 - `GET /api/v1/meta`

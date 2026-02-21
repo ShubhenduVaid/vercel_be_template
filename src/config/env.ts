@@ -26,6 +26,7 @@ const booleanFromEnv = z.preprocess((value) => {
 
 const envSchema = z.object({
   PORT: z.coerce.number().int().min(1).max(65535).default(3001),
+  SITE_URL: z.string().url().default("http://localhost:3001"),
   LOG_LEVEL: z
     .enum(["fatal", "error", "warn", "info", "debug", "trace", "silent"])
     .default("info"),
@@ -55,6 +56,7 @@ const toOrigins = (value: string): string[] => {
 export interface AppConfig {
   appEnv: RuntimeEnvironment;
   port: number;
+  siteUrl: string;
   logLevel: "fatal" | "error" | "warn" | "info" | "debug" | "trace" | "silent";
   corsOrigins: string[];
   docsEnabled: boolean;
@@ -80,6 +82,7 @@ export const parseEnv = (env: NodeJS.ProcessEnv): AppConfig => {
   return {
     appEnv: resolveRuntimeEnvironment(env),
     port: parsed.PORT,
+    siteUrl: parsed.SITE_URL.replace(/\/+$/, ""),
     logLevel: parsed.LOG_LEVEL,
     corsOrigins: toOrigins(parsed.CORS_ORIGINS),
     docsEnabled: parsed.DOCS_ENABLED,

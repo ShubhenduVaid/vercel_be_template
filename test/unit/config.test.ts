@@ -8,6 +8,7 @@ describe("parseEnv", () => {
 
     expect(config.appEnv).toBe("local");
     expect(config.port).toBe(3001);
+    expect(config.siteUrl).toBe("http://localhost:3001");
     expect(config.docsEnabled).toBe(true);
     expect(config.corsOrigins).toEqual([]);
     expect(config.rateLimit.enabled).toBe(false);
@@ -17,6 +18,7 @@ describe("parseEnv", () => {
     const config = parseEnv({
       APP_ENV: "preview",
       PORT: "8080",
+      SITE_URL: "https://api.example.com/",
       LOG_LEVEL: "warn",
       CORS_ORIGINS: "https://a.example.com, https://b.example.com",
       DOCS_ENABLED: "false",
@@ -32,6 +34,7 @@ describe("parseEnv", () => {
 
     expect(config.appEnv).toBe("preview");
     expect(config.port).toBe(8080);
+    expect(config.siteUrl).toBe("https://api.example.com");
     expect(config.logLevel).toBe("warn");
     expect(config.corsOrigins).toEqual(["https://a.example.com", "https://b.example.com"]);
     expect(config.docsEnabled).toBe(false);

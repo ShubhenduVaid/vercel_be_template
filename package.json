@@ -3,6 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "description": "Reusable Vercel Node.js backend template (Express + TypeScript)",
+  "keywords": [
+    "vercel",
+    "nodejs",
+    "express",
+    "typescript",
+    "backend-template",
+    "openapi",
+    "seo",
+    "llms"
+  ],
   "main": "dist/server.js",
   "engines": {
     "node": "20.x"
